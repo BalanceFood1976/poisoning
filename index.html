@@ -1,0 +1,120 @@
+<!-- 자가진단 테스트 index.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>식중독 자가진단 테스트</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet"/>
+<style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      padding: 30px 20px;
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: left;
+    }
+    h2, p, label, button {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+    h2 {
+      font-size: 24px;
+      margin-bottom: 10px;
+      animation-delay: 0.2s;
+    }
+    p {
+      margin-bottom: 20px;
+      font-size: 16px;
+      animation-delay: 0.4s;
+    }
+    label {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 16px;
+    }
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 14px 28px;
+      font-size: 16px;
+      font-weight: bold;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      transition: all 0.2s ease;
+      animation-delay: 1.4s;
+    }
+    button:hover {
+      background-color: #388e3c;
+    }
+    button:active {
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    label:nth-of-type(1) { animation-delay: 0.5s; }
+    label:nth-of-type(2) { animation-delay: 0.6s; }
+    label:nth-of-type(3) { animation-delay: 0.7s; }
+    label:nth-of-type(4) { animation-delay: 0.8s; }
+    label:nth-of-type(5) { animation-delay: 0.9s; }
+    label:nth-of-type(6) { animation-delay: 1.0s; }
+    label:nth-of-type(7) { animation-delay: 1.1s; }
+    label:nth-of-type(8) { animation-delay: 1.2s; }
+    label:nth-of-type(9) { animation-delay: 1.3s; }
+    label:nth-of-type(10) { animation-delay: 1.4s; }
+  </style>
+</head>
+<body class="fade-in">
+<h2>✅ 자가 진단 테스트</h2>
+<p>다음 문항 중 해당되는 항목을 체크해보세요.</p>
+<form id="testForm">
+<label><input type="checkbox" /> 도시락을 3시간 이상 실온에 두었다</label>
+<label><input type="checkbox" /> 손 씻지 않고 조리했다</label>
+<label><input type="checkbox" /> 덜 익힌 고기나 해산물 섭취</label>
+<label><input type="checkbox" /> 데우지 않고 상온 음식 재섭취</label>
+<label><input type="checkbox" /> 가족 중 유사 증상자 있음</label>
+<label><input type="checkbox" /> 설사 + 복통</label>
+<label><input type="checkbox" /> 하루 3회 이상 구토</label>
+<label><input type="checkbox" /> 38도 이상 고열</label>
+<label><input type="checkbox" /> 음식 섭취 후 12시간 내 증상</label>
+<label><input type="checkbox" /> 생수 아닌 수돗물 음용</label>
+
+<button type="button" onclick="checkResult()">결과 확인하기</button>
+</form>
+<script>
+  function checkResult() {
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    let count = 0;
+    checkboxes.forEach(box => {
+      if (box.checked) count++;
+    });
+    let nextPage = "";
+    if (count <= 2) {
+      nextPage = "result-low.html";
+    } else if (count <= 5) {
+      nextPage = "result-mid.html";
+    } else if (count <= 7) {
+      nextPage = "result-high.html";
+    } else {
+      nextPage = "result-veryhigh.html";
+    }
+    document.body.classList.add("fade-out");
+    setTimeout(() => {
+      window.location.href = nextPage;
+    }, 600);
+  }
+</script>
+</body>
+</html>
